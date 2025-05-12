@@ -1,7 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 import React from 'react';
 
-import Home from '@/pages/home';
+import Projet from '@/pages/projects';
+
 import AppLayout from '@/layouts/app.layout';
 
 export const routes: RouteObject[] = [
@@ -15,7 +16,7 @@ export const routes: RouteObject[] = [
         children: [
             {
                 index: true,
-                element: <Home />,
+                element: <Projet />,
             },
         ],
     },
