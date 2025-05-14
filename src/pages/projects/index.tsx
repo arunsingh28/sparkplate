@@ -1,13 +1,18 @@
 import Collapse from "./components/collapse";
-import Issues from "./components/Issues";
+import Issues from "./components/issues";
+import HeaderBar from "./components/headerBar";
+import Sheets from "./sheets";
 
 function Project() {
     return (
-        <div className="px-2 flex items-start gap-4">
-           <Collapse/>
-            <div className="flex flex-col gap-2 w-full">
-                <Issues />
-            </div>
+        <div>
+            <HeaderBar />
+            <div className="flex w-full gap-2 mt-2">
+            <Collapse/>
+            <Issues />
+           </div>
+
+           <Sheets/>
         </div>
     );
 }

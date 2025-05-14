@@ -1,4 +1,4 @@
-import { RoleIcon,UsersIcon,TeamsIcon } from '@/components/icons';
+import { RoleIcon,UsersIcon } from '@/components/icons';
 import {
     LayoutGrid,
     Settings,
@@ -11,12 +11,13 @@ import {
     ShieldUser,
     UserLock,Users
 } from 'lucide-react';
+import { APP_PATHS } from './paths';
 
 export const menuItems = [
     {
         title: 'Projects',
         icon: LayoutGrid,
-        path: '/projects',
+        path: APP_PATHS.PROJECTS,
         active: true,
     },
     {

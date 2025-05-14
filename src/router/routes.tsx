@@ -4,10 +4,11 @@ import React from 'react';
 import Projet from '@/pages/projects';
 
 import AppLayout from '@/layouts/app.layout';
+import { APP_PATHS } from '@/utils/paths';
 
 export const routes: RouteObject[] = [
     {
-        path: '/',
+        path: APP_PATHS.PROJECTS,
         element: (
             <React.Suspense fallback={<div>Loading...</div>}>
                 <AppLayout />

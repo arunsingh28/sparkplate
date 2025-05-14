@@ -21,7 +21,7 @@ const AppLayout = () => {
         <React.Fragment>
             <Layout>
                 <Sider
-                    className="w-full bg-[#080f33] "
+                    className="w-full bg-darkPrimary"
                     trigger={null}
                     collapsible
                     collapsed={collapsed}
@@ -33,20 +33,23 @@ const AppLayout = () => {
                         style={{ padding: 0, background: colorBgContainer }}
                         className="flex items-center justify-between"
                     >
-                        <div className='flex items-center gap-5'>
-                        <Button
-                            type="text"
-                            icon={
-                                collapsed ? (
-                                    <MenuUnfoldOutlined />
-                                ) : (
-                                    <MenuFoldOutlined />
-                                )
-                            }
-                            onClick={() => setCollapsed(!collapsed)}
-                            className='h-full !rounded-none px-3 hover:!bg-none'
-                        />
-                        <Select
+                        <div className="flex items-center gap-5">
+                            <Button
+                                type="text"
+                                icon={
+                                    collapsed ? (
+                                        <MenuUnfoldOutlined />
+                                    ) : (
+                                        <MenuFoldOutlined />
+                                    )
+                                }
+                                onClick={() => setCollapsed(!collapsed)}
+                                className="h-full !rounded-none bg-none ml-2 px-2"
+                                style={{
+                                    padding: '0 24px !important',
+                                }}
+                            />
+                            {/* <Select
                                 showSearch
                                 placeholder="Select a project"
                                 filterOption={(input, option) =>
@@ -60,12 +63,10 @@ const AppLayout = () => {
                                     { value: '3', label: 'Tom' },
                                 ]}
                                 className='w-[230px]'
-                            />
+                            /> */}
                         </div>
 
                         <div className="flex items-center justify-center gap-4 mr-3">
-                            
-
                             <Button type="dashed" icon={<PlusOutlined />}>
                                 New Project
                             </Button>

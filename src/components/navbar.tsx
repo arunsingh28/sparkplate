@@ -1,8 +1,9 @@
 import React from 'react';
 import { Tooltip } from 'antd';
 import { ChevronUpIcon, ChevronRightIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/util';
-import { menuItems } from '@/lib/options';
+import { menuItems } from '@/utils/menu';
 // import fullIcon from '@/assets/icons/logo-light.png';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -53,7 +54,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                         }
                         placement="right"
                     >
-                        <div
+                        <Link to={item.path  || ''}
                             onClick={() =>
                                 !collapsed &&
                                 item.children &&
@@ -89,7 +90,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                                         size={20}
                                         strokeWidth={1.5}
                                         className={cn(
-                                            'text-gray-700 transition-transform duration-300',
+                                            'text-gray-400 transition-transform duration-300',
                                             expandedIndex === index &&
                                                 'rotate-180',
                                         )}
@@ -99,7 +100,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                                 {/* ChevronRight in collapsed mode */}
                                 {collapsed && item.children && (
                                     <ChevronRightIcon
-                                        className="absolute right-3 text-gray-500 group-hover:text-black transition"
+                                        className="absolute right-3 text-gray-400 group-hover:text-black transition"
                                         size={16}
                                     />
                                 )}
@@ -135,7 +136,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                                             {item.children.map((child, i) => (
                                                 <div
                                                     key={i}
-                                                    className="text-sm text-gray-600 hover:text-black rounded-md cursor-pointer flex items-center gap-2 hover:bg-primary py-1 px-2"
+                                                    className="text-sm text-gray-300 hover:text-white rounded-md cursor-pointer flex items-center gap-2 hover:bg-primary py-1 px-2"
                                                 >
                                                     <child.icon size={20} />
                                                     <span>{child.title}</span>
@@ -147,17 +148,17 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
 
                             {/* Floating submenu in collapsed mode */}
                             {collapsed && item.children && (
-                                <div className="absolute left-full top-0 ml-2 hidden group-hover:flex bg-white border rounded-md shadow-lg p-2 flex-col z-10 min-w-[160px]">
-                                    <h4 className="ml-2 font-semibold text-gray-800 mb-2">
+                                <div className="absolute left-full top-0 -ml-0 hidden group-hover:flex bg-darkPrimary rounded-md rounded-l-none shadow-lg p-2 flex-col z-10 min-w-[160px]">
+                                    <h4 className="ml-2 font-semibold text-gray-100 mb-2">
                                         Teams and Roles{' '}
                                     </h4>
                                     {item.children.map((child, i) => (
                                         <div
                                             key={i}
-                                            className="text-sm text-gray-600 hover:text-black rounded-md cursor-pointer even:mt-1 flex items-center gap-2 hover:bg-primary py-1 px-2"
+                                            className="text-sm text-gray-300 hover:text-white rounded-md cursor-pointer even:mt-1 flex items-center gap-2 hover:bg-gray-200/20 py-1 px-2"
                                         >
                                             <child.icon
-                                                className="!text-gray-700 !text-start"
+                                                className="!text-gray-100 !text-start"
                                                 size={20}
                                             />
                                             <span>{child.title}</span>
@@ -165,7 +166,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                                     ))}
                                 </div>
                             )}
-                        </div>
+                        </Link>
                     </Tooltip>
                 ))}
             </div>

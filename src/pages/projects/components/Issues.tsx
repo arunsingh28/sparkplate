@@ -1,4 +1,4 @@
-import { Button, Table, Tag, Input, Tooltip } from 'antd';
+import { Button, Table, Tag, Input, Tooltip, Checkbox } from 'antd';
 import type { TableProps } from 'antd';
 import {
     EarthIcon,
@@ -9,6 +9,7 @@ import {
     OctagonAlert,
     Loader,
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SecurityScanOutlined, SearchOutlined } from '@ant-design/icons';
 
 interface Severity {
@@ -36,32 +37,61 @@ interface DataType {
     scanStatus?: 'FAIL' | 'PASS' | 'IN-PROGRESS';
 }
 
+const getLastScanDateString = (date: Date | undefined) => {
+    // return string like 4 day ago or 2 hours ago or 1 minute ago or 1 month ago or 1 year ago
+    if (!date) return 'N/A';
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);
+    const years = Math.floor(months / 12);
+    if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
+    if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+};
+
 const columns: TableProps<DataType>['columns'] = [
     {
-        title: 'PROJECT',
+        title: <Checkbox className="h-4 w-4" />,
+        dataIndex: 'checkbox',
+        key: 'checkbox',
+        render: () => (
+            <Checkbox className="h-4 w-4 data-[state=checked]:text-primary" />
+        ),
+        width: 50,
+        fixed: 'left',
+    },
+    {
+        title: <span className="!text-[12px]">PROJECT</span>,
         dataIndex: 'Project',
         key: 'project',
         render: (text, record) => (
             <div className="flex items-center gap-2">
                 {
                     {
-                        PASS: <BadgeCheck className="text-green-500" />,
-                        FAIL: <OctagonAlert className="text-red-500" />,
+                        PASS: (
+                            <BadgeCheck size={17} className="text-green-500" />
+                        ),
+                        FAIL: (
+                            <OctagonAlert size={17} className="text-red-500" />
+                        ),
                         'IN-PROGRESS': (
-                            <Loader className="text-blue-500 animate-spin" />
+                            <Loader
+                                size={17}
+                                className="text-blue-500 animate-spin"
+                            />
                         ),
                     }[record.scanStatus || 'PASS']
                 }
-                <div className="flex flex-col justify-center">
-                    <p className="text-sm font-medium text-gray-800">{text}</p>
-
-                    {/* here i want to show the lastScan detail  */}
-                    {record.lastScan && (
-                        <span className="text-xs text-gray-500">
-                            {`Last Scan: ${record.lastScan.toLocaleDateString()}`}
-                        </span>
-                    )}
-                </div>
+                <Link to={`?project_id=${text}`} className="flex flex-col justify-center">
+                    <p className="text-[13px] text-gray-800">{text}</p>
+                </Link>
             </div>
         ),
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
@@ -110,7 +140,7 @@ const columns: TableProps<DataType>['columns'] = [
         ),
     },
     {
-        title: 'SEVERITY',
+        title: <span className="!text-[12px]">SEVERITY</span>,
         dataIndex: 'Severity',
         key: 'Severity',
         render: (severity: Severity) => (
@@ -176,7 +206,7 @@ const columns: TableProps<DataType>['columns'] = [
         },
     },
     {
-        title: 'SCANNERS',
+        title: <span className="!text-[12px]">SCANNERS</span>,
         dataIndex: 'Scanners',
         key: 'Scanners',
         render: (scanners: Scanners) => (
@@ -184,17 +214,17 @@ const columns: TableProps<DataType>['columns'] = [
                 {Object.entries(scanners).map(([key, value]) => {
                     if (!value) return null;
                     const styles: Record<string, string> = {
-                        SAST: 'bg-purple-100 text-purple-600',
-                        SCA: 'bg-green-100 text-green-600',
-                        SECRET: 'bg-red-100 text-red-600',
-                        TPV: 'bg-blue-100 text-blue-600',
+                        SAST: 'bg-purple-100/70 text-primary',
+                        SCA: 'bg-purple-100/70 text-primary',
+                        SECRET: 'bg-purple-100/70 text-primary',
+                        TPV: 'bg-purple-100/70 text-primary',
                     };
 
                     const IconMap: Record<string, React.ReactNode> = {
-                        SAST: <EarthIcon className="w-5 h-5" />,
-                        SCA: <CodeXml className="w-5 h-5" />,
-                        SECRET: <Key className="w-5 h-5" />,
-                        TPV: <DoorClosedLocked className="w-5 h-5" />,
+                        SAST: <EarthIcon size={15} strokeWidth={1.5} />,
+                        SCA: <CodeXml size={15} strokeWidth={1.5} />,
+                        SECRET: <Key size={15} strokeWidth={1.5} />,
+                        TPV: <DoorClosedLocked size={15} strokeWidth={1.5} />,
                     };
 
                     return (
@@ -247,7 +277,7 @@ const columns: TableProps<DataType>['columns'] = [
         },
     },
     {
-        title: 'TAGS',
+        title: <span className="!text-[12px]">TAGS</span>,
         key: 'tags',
         dataIndex: 'tags',
         render: (tags: string[]) => (
@@ -259,17 +289,33 @@ const columns: TableProps<DataType>['columns'] = [
         ),
     },
     {
-        title: 'ACTION',
+        title: <span className="!text-[12px]">LAST SCAN</span>,
+        dataIndex: 'lastScan',
+        key: 'lastScan',
+        render: (text) => (
+            <p className="text-[12px] text-gray-800">
+                {getLastScanDateString(text)}
+            </p>
+        ),
+        sorter: (a, b) => {
+            return (
+                new Date(a.lastScan || '').getTime() -
+                new Date(b.lastScan || '').getTime()
+            );
+        },
+    },
+    {
+        title: <span className="!text-[12px]">ACTION</span>,
         key: 'action',
         render: (_, record) => (
             <Button
                 key={record.key}
-                icon={<SecurityScanOutlined className="animate-pulse" />}
-                // className="bg-blue-500 text-white hover:bg-blue-600"
+                icon={<SecurityScanOutlined />}
+                className="bg-primary text-white hover:!bg-primary/80 !py-3"
                 type="primary"
                 size="small"
             >
-                Action
+                Scan
             </Button>
         ),
     },
@@ -313,7 +359,7 @@ const data: DataType[] = [
             TPV: true,
         },
         tags: ['devops', 'admin'],
-        lastScan: new Date('2023-10-02'),
+        lastScan: new Date('2025-05-5'),
         scanStatus: 'PASS',
     },
     {
@@ -333,14 +379,14 @@ const data: DataType[] = [
             TPV: true,
         },
         tags: ['admin'],
-        lastScan: new Date('2023-10-03'),
+        lastScan: new Date('2025-02-03'),
         scanStatus: 'IN-PROGRESS',
     },
 ];
 
 const Issues = () => {
     return (
-        <div>
+        <div className="w-full">
             <Table
                 columns={columns}
                 dataSource={data}

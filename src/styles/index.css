@@ -8,3 +8,13 @@
         format('truetype');
     font-weight: 100 200 300 400 500 600 700 800 900;
 }
+
+
+.ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #4121e9; /* Tailwind's primary blue-500 */
+    border-color: #4121e9;
+  }
+  
+  .ant-checkbox-checked .ant-checkbox-inner::after {
+    border-color: white; /* check mark */
+  }
