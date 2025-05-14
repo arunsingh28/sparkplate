@@ -1,4 +1,4 @@
-import { Collapse, CollapseProps,Input } from 'antd';
+import { Collapse, CollapseProps,Checkbox } from 'antd';
 import {ChevronUp} from 'lucide-react';
 
 interface CollapseItem {}
@@ -12,7 +12,7 @@ const collapse: React.FC<CollapseItem> = () => {
                 {
                     ['Critical', 'High', 'Medium', 'Low'].map((item) => (
                         <div key={item} className="flex items-center gap-2">
-                            <Input type="checkbox" className='h-4 w-4'/>
+                            <Checkbox type="checkbox" className='h-4 w-4'/>
                             <p className='text-gray-700'>{item}</p>
                         </div>
                     ))
@@ -31,7 +31,7 @@ const collapse: React.FC<CollapseItem> = () => {
             {
                 ['With Issues', 'Without Issues'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
-                        <Input type="checkbox" className='h-4 w-4'/>
+                        <Checkbox type="checkbox" className='h-4 w-4'/>
                         <p className='text-gray-700'>{item}</p>
                     </div>
                 ))
@@ -50,7 +50,7 @@ const collapse: React.FC<CollapseItem> = () => {
             {
                 ['SAST', 'SCA', 'Secret'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
-                        <Input type="checkbox" className='h-4 w-4'/>
+                        <Checkbox type="checkbox" className='h-4 w-4'/>
                         <p className='text-gray-700'>{item}</p>
                     </div>
                 ))
@@ -69,7 +69,7 @@ const collapse: React.FC<CollapseItem> = () => {
             {
                 ['Javascript', 'Python', 'C++','Java', 'Typescript', 'Shell'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
-                        <Input type="checkbox" className='h-4 w-4'/>
+                        <Checkbox type="checkbox" className='h-4 w-4'/>
                         <p className='text-gray-700'>{item}</p>
                     </div>
                 ))
