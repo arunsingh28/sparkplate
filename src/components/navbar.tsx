@@ -38,7 +38,7 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
         <React.Fragment>
             <div
                 className={cn(
-                    'p-2 flex flex-col items-start mt-3 px-3',
+                    'p-2 flex flex-col items-start mt-3 px-3 ',
                     collapsed && 'justify-center items-center',
                 )}
             >
@@ -74,8 +74,9 @@ const Navbar = ({ collapsed }: { collapsed: boolean }) => {
                             >
                                 <div className="flex items-center gap-2 relative">
                                     <item.icon
-                                        className={cn('text-2xl text-gray-400', item.active && 'text-white')}
+                                        className={cn('text-xl text-gray-400', item.active && 'text-white')}
                                         strokeWidth={1.5}
+                                        size={20}
                                     />
                                     {!collapsed && (
                                         <span className="text-sm text-gray-300">

@@ -19,7 +19,7 @@ const AppLayout = () => {
         <React.Fragment>
             <Layout>
                 <Sider
-                    className="w-full bg-darkPrimary"
+                    className="w-full bg-darkPrimary border-r border-[#2A2D30]"
                     trigger={null}
                     collapsible
                     collapsed={collapsed}
