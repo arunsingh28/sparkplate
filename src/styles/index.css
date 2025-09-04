@@ -18,3 +18,11 @@
   .ant-checkbox-checked .ant-checkbox-inner::after {
     border-color: white; /* check mark */
   }
+
+.ant-table-cell::before{
+  display: none;
+}
+
+.ant-collapse-expand-icon{
+  color: #AAB0B9;
+}

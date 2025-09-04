@@ -5,7 +5,7 @@ import {
     MenuUnfoldOutlined,
     PlusOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, theme, Select } from 'antd';
+import { Button, Layout } from 'antd';
 import { Moon, User, CircleHelp } from 'lucide-react';
 import Navbar from '@/components/navbar';
 
@@ -13,9 +13,7 @@ const { Header, Sider, Content } = Layout;
 
 const AppLayout = () => {
     const [collapsed, setCollapsed] = React.useState(false);
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
+  
 
     return (
         <React.Fragment>
@@ -30,7 +28,7 @@ const AppLayout = () => {
                 </Sider>
                 <Layout>
                     <Header
-                        style={{ padding: 0, background: colorBgContainer }}
+                        style={{ padding: 0, background: '#050505' }}
                         className="flex items-center justify-between"
                     >
                         <div className="flex items-center gap-5">
@@ -38,9 +36,9 @@ const AppLayout = () => {
                                 type="text"
                                 icon={
                                     collapsed ? (
-                                        <MenuUnfoldOutlined />
+                                        <MenuUnfoldOutlined className='text-white'/>
                                     ) : (
-                                        <MenuFoldOutlined />
+                                        <MenuFoldOutlined className='text-white'/>
                                     )
                                 }
                                 onClick={() => setCollapsed(!collapsed)}
@@ -70,12 +68,12 @@ const AppLayout = () => {
                             <Button type="dashed" icon={<PlusOutlined />}>
                                 New Project
                             </Button>
-                            <CircleHelp size={18} />
-                            <Moon size={18} />
-                            <User size={18} />
+                            <CircleHelp size={18} className='text-white'/>
+                            <Moon size={18} className='text-white'/>
+                            <User size={18} className='text-white'/>
                         </div>
                     </Header>
-                    <Content className="h-[calc(100vh-64px)] p-2">
+                    <Content className="h-[calc(100vh-64px)] p-2 bg-darkPrimary">
                         <Outlet />
                     </Content>
                 </Layout>

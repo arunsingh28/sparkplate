@@ -57,20 +57,27 @@ const getLastScanDateString = (date: Date | undefined) => {
 };
 
 const columns: TableProps<DataType>['columns'] = [
-    {
-        title: <Checkbox className="h-4 w-4" />,
-        dataIndex: 'checkbox',
-        key: 'checkbox',
-        render: () => (
-            <Checkbox className="h-4 w-4 data-[state=checked]:text-primary" />
-        ),
-        width: 50,
-        fixed: 'left',
-    },
+    // {
+    //     title: <Checkbox className="h-4 w-4" />,
+    //     dataIndex: 'checkbox',
+    //     key: 'checkbox',
+    //     render: () => (
+    //         <Checkbox className="h-4 w-4 data-[state=checked]:text-primary" />
+    //     ),
+    //     width: 50,
+    //     fixed: 'left',
+    //     className: '!bg-darkSecondary',
+    // },
     {
         title: <span className="!text-[12px]">PROJECT</span>,
         dataIndex: 'Project',
         key: 'project',
+        onHeaderCell: () => ({
+            className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
+        }),
+        onCell: () => ({
+            className: '!border-[#2A2C33]',
+        }),
         render: (text, record) => (
             <div className="flex items-center gap-2">
                 {
@@ -90,7 +97,7 @@ const columns: TableProps<DataType>['columns'] = [
                     }[record.scanStatus || 'PASS']
                 }
                 <Link to={`?project_id=${text}`} className="flex flex-col justify-center">
-                    <p className="text-[13px] text-gray-800">{text}</p>
+                    <p className="text-[13px] text-white">{text}</p>
                 </Link>
             </div>
         ),
@@ -138,11 +145,18 @@ const columns: TableProps<DataType>['columns'] = [
                 }}
             />
         ),
+        className: '!bg-darkSecondary !text-textSecondary',
     },
     {
         title: <span className="!text-[12px]">SEVERITY</span>,
         dataIndex: 'Severity',
         key: 'Severity',
+         onHeaderCell: () => ({
+            className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
+        }),
+         onCell: () => ({
+            className: '!border-[#2A2C33]',
+        }),
         render: (severity: Severity) => (
             <div className="flex flex-wrap gap-0 text-sm font-medium text-gray-800">
                 {Object.entries(severity).map(([key, value]) => (
@@ -204,11 +218,18 @@ const columns: TableProps<DataType>['columns'] = [
             const severity = record.Severity;
             return severity[value as keyof Severity] > 0;
         },
+        className: '!bg-darkSecondary !text-textSecondary',
     },
     {
         title: <span className="!text-[12px]">SCANNERS</span>,
         dataIndex: 'Scanners',
         key: 'Scanners',
+         onHeaderCell: () => ({
+            className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
+        }),
+         onCell: () => ({
+            className: '!border-[#2A2C33]',
+        }),
         render: (scanners: Scanners) => (
             <div className="flex flex-wrap gap-2">
                 {Object.entries(scanners).map(([key, value]) => {
@@ -275,10 +296,17 @@ const columns: TableProps<DataType>['columns'] = [
             const scanners = record.Scanners;
             return scanners[value as keyof Scanners] === true;
         },
+        className: '!bg-darkSecondary !text-textSecondary',
     },
     {
         title: <span className="!text-[12px]">TAGS</span>,
         key: 'tags',
+         onHeaderCell: () => ({
+            className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
+        }),
+         onCell: () => ({
+            className: '!border-[#2A2C33]',
+        }),
         dataIndex: 'tags',
         render: (tags: string[]) => (
             <div className="flex flex-wrap gap-2">
@@ -287,26 +315,33 @@ const columns: TableProps<DataType>['columns'] = [
                 ))}
             </div>
         ),
+        className: '!bg-darkSecondary !text-textSecondary',
     },
-    {
-        title: <span className="!text-[12px]">LAST SCAN</span>,
-        dataIndex: 'lastScan',
-        key: 'lastScan',
-        render: (text) => (
-            <p className="text-[12px] text-gray-800">
-                {getLastScanDateString(text)}
-            </p>
-        ),
-        sorter: (a, b) => {
-            return (
-                new Date(a.lastScan || '').getTime() -
-                new Date(b.lastScan || '').getTime()
-            );
-        },
-    },
+    // {
+    //     title: <span className="!text-[12px]">LAST SCAN</span>,
+    //     dataIndex: 'lastScan',
+    //     key: 'lastScan',
+    //     render: (text) => (
+    //         <p className="text-[12px] text-gray-800">
+    //             {getLastScanDateString(text)}
+    //         </p>
+    //     ),
+    //     sorter: (a, b) => {
+    //         return (
+    //             new Date(a.lastScan || '').getTime() -
+    //             new Date(b.lastScan || '').getTime()
+    //         );
+    //     },
+    // },
     {
         title: <span className="!text-[12px]">ACTION</span>,
         key: 'action',
+         onHeaderCell: () => ({
+            className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
+        }),
+         onCell: () => ({
+            className: '!border-[#2A2C33]',
+        }),
         render: (_, record) => (
             <Button
                 key={record.key}
@@ -318,6 +353,8 @@ const columns: TableProps<DataType>['columns'] = [
                 Scan
             </Button>
         ),
+        width: 100,
+        className: '!bg-darkSecondary !text-textSecondary',
     },
 ];
 
@@ -386,7 +423,7 @@ const data: DataType[] = [
 
 const Issues = () => {
     return (
-        <div className="w-full">
+        <div className="w-full bg-darkSecondary">
             <Table
                 columns={columns}
                 dataSource={data}
@@ -399,8 +436,11 @@ const Issues = () => {
                     total: data.length,
                     position: ['bottomRight'],
                     showQuickJumper: true,
+                    className: '!bg-darkSecondary !text-textSecondary !border-[#2A2C33]',
                 }}
                 className="w-full"
+                rowClassName="bg-darkSecondary"
+                // virtual
             />
         </div>
     );

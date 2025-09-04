@@ -1,5 +1,5 @@
 import Collapse from "./components/collapse";
-import Issues from "./components/issues";
+import Issues from "./components/Issues";
 import HeaderBar from "./components/headerBar";
 import Sheets from "./sheets";
 
@@ -11,7 +11,6 @@ function Project() {
             <Collapse/>
             <Issues />
            </div>
-
            <Sheets/>
         </div>
     );

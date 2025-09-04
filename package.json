@@ -5,7 +5,7 @@
     "type": "module",
     "author": {
     "email": "dev.arunsingh28@gmail.com",
-    "name": "Arun Singh",
+    "name": "Arun Singh"
       },
     "scripts": {
         "dev": "vite",

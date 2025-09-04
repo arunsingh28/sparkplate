@@ -7,87 +7,87 @@ const collapse: React.FC<CollapseItem> = () => {
     const items: CollapseProps['items'] = [
         {
             key: '1',
-            label: <p className='text-[13px] text-gray-800'>Sererity</p>,
+            label: <p className='text-[13px] text-textSecondary'>Sererity</p>,
             children: <div className="flex flex-col gap-2 items-start">
                 {
                     ['Critical', 'High', 'Medium', 'Low'].map((item) => (
                         <div key={item} className="flex items-center gap-2">
                             <Checkbox type="checkbox" className='h-4 w-4'/>
-                            <p className='text-gray-700'>{item}</p>
+                            <p className='text-textSecondary'>{item}</p>
                         </div>
                     ))
                 }
             </div>,
-             className: '!border-none mt-1',
-             classNames: {
-                 body: 'bg-[#f5f5f5] !border-none',
-                 header: 'bg-white !border-none !py-1 !rounded-md',
-             },
+            className: '!bg-darkThird !border-none mt-1 py-1 !rounded-md',
+            classNames: {
+                body: 'bg-darkThird !border-none !rounded-md',
+                header: 'bg-darkThird !border-none !py-1 !rounded-md',
+            },
         },
         {
             key: '2',
-            label: <p className='text-[13px] text-gray-800'>Show</p>,
+            label: <p className='text-[13px] text-textSecondary'>Show</p>,
             children: <div className="flex flex-col gap-2 items-start">
             {
                 ['With Issues', 'Without Issues'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                         <Checkbox type="checkbox" className='h-4 w-4'/>
-                        <p className='text-gray-700'>{item}</p>
+                        <p className='text-textSecondary'>{item}</p>
                     </div>
                 ))
             }
         </div>,
-            className: '!bg-[#f5f5f5] !border-none mt-1',
+           className: '!bg-darkThird !border-none mt-1 py-1 !rounded-md',
             classNames: {
-                body: 'bg-[#f5f5f5] !border-none',
-                header: 'bg-white !border-none !py-1 !rounded-md',
+                body: 'bg-darkThird !border-none !rounded-md',
+                header: 'bg-darkThird !border-none !py-1 !rounded-md',
             },
         },
         {
             key: '3',
-            label: <p className='text-[13px] text-gray-800'>Scan type</p>,
+            label: <p className='text-[13px] text-textSecondary'>Scan type</p>,
             children: <div className="flex flex-col gap-2 items-start">
             {
                 ['SAST', 'SCA', 'Secret'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                         <Checkbox type="checkbox" className='h-4 w-4'/>
-                        <p className='text-gray-700'>{item}</p>
+                        <p className='text-textSecondary'>{item}</p>
                     </div>
                 ))
             }
         </div>,
-            className: '!bg-[#f5f5f5] !border-none mt-1',
+             className: '!bg-darkThird !border-none mt-1 py-1 rounded-md',
             classNames: {
-                body: 'bg-[#f5f5f5] !border-none',
-                header: 'bg-white !border-none !py-1 !rounded-md',
+                body: 'bg-darkThird !border-none !rounded-md',
+                header: 'bg-darkThird !border-none !py-1 !rounded-md',
             },
         },
         {
             key: '4',
-            label: <p className='text-[13px] text-gray-800'>Language</p>,
+            label: <p className='text-[13px] text-textSecondary'>Language</p>,
             children: <div className="flex flex-col gap-2 items-start">
             {
                 ['Javascript', 'Python', 'C++','Java', 'Typescript', 'Shell'].map((item) => (
                     <div key={item} className="flex items-center gap-2">
                         <Checkbox type="checkbox" className='h-4 w-4'/>
-                        <p className='text-gray-700'>{item}</p>
+                        <p className='text-textSecondary'>{item}</p>
                     </div>
                 ))
             }
         </div>,
-            className: '!bg-[#f5f5f5] !border-none mt-1',
+            className: '!bg-darkThird !border-none mt-1 py-1 !rounded-md',
             classNames: {
-                body: 'bg-[#f5f5f5] !border-none',
-                header: 'bg-white !border-none !py-1 !rounded-md',
+                body: 'bg-darkThird !border-none !rounded-md',
+                header: 'bg-darkThird !border-none !py-1 !rounded-md',
             },
         },
     ];
 
     return (
-        <div className="w-[300px]">
+        <div className="w-[300px] bg-darkSecondary h-[calc(100vh-150px)] rounded-md">
             <Collapse
                 items={items}
-                className="!border-none bg-transparent"
+                className="!border-none !rounded-md"
                 defaultActiveKey={['1']}
                 bordered={false}
                 expandIconPosition="right"
@@ -97,6 +97,7 @@ const collapse: React.FC<CollapseItem> = () => {
                         size={20}
                     />
                 )}
+                rootClassName="p-3"
             />
         </div>
     );
