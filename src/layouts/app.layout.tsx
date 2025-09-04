@@ -65,7 +65,7 @@ const AppLayout = () => {
                         </div>
 
                         <div className="flex items-center justify-center gap-4 mr-3">
-                            <Button type="dashed" icon={<PlusOutlined />}>
+                            <Button type="primary" className='bg-primary' icon={<PlusOutlined />}>
                                 New Project
                             </Button>
                             <CircleHelp size={18} className='text-white'/>
