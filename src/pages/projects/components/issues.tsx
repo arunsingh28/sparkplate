@@ -1,4 +1,4 @@
-import { Button, Table, Tag, Input, Tooltip } from 'antd';
+import { Button, Table, Tag, Input, Tooltip, ConfigProvider } from 'antd';
 import type { TableProps } from 'antd';
 import {
     EarthIcon,
@@ -151,10 +151,10 @@ const columns: TableProps<DataType>['columns'] = [
         title: <span className="!text-[12px]">SEVERITY</span>,
         dataIndex: 'Severity',
         key: 'Severity',
-         onHeaderCell: () => ({
+        onHeaderCell: () => ({
             className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
         }),
-         onCell: () => ({
+        onCell: () => ({
             className: '!border-[#2A2C33]',
         }),
         render: (severity: Severity) => (
@@ -224,10 +224,10 @@ const columns: TableProps<DataType>['columns'] = [
         title: <span className="!text-[12px]">SCANNERS</span>,
         dataIndex: 'Scanners',
         key: 'Scanners',
-         onHeaderCell: () => ({
+        onHeaderCell: () => ({
             className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
         }),
-         onCell: () => ({
+        onCell: () => ({
             className: '!border-[#2A2C33]',
         }),
         render: (scanners: Scanners) => (
@@ -301,10 +301,10 @@ const columns: TableProps<DataType>['columns'] = [
     {
         title: <span className="!text-[12px]">TAGS</span>,
         key: 'tags',
-         onHeaderCell: () => ({
+        onHeaderCell: () => ({
             className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
         }),
-         onCell: () => ({
+        onCell: () => ({
             className: '!border-[#2A2C33]',
         }),
         dataIndex: 'tags',
@@ -336,10 +336,10 @@ const columns: TableProps<DataType>['columns'] = [
     {
         title: <span className="!text-[12px]">ACTION</span>,
         key: 'action',
-         onHeaderCell: () => ({
+        onHeaderCell: () => ({
             className: '!bg-darkThird !text-textSecondary !border-[#2A2C33]',
         }),
-         onCell: () => ({
+        onCell: () => ({
             className: '!border-[#2A2C33]',
         }),
         render: (_, record) => (
@@ -424,24 +424,46 @@ const data: DataType[] = [
 const Issues = () => {
     return (
         <div className="w-full bg-darkSecondary">
-            <Table
-                columns={columns}
-                dataSource={data}
-                pagination={{
-                    pageSize: 5,
-                    showSizeChanger: true,
-                    pageSizeOptions: ['5', '10', '20'],
-                    showTotal: (total, range) =>
-                        `Total ${total} items, from ${range[0]} to ${range[1]}`,
-                    total: data.length,
-                    position: ['bottomRight'],
-                    showQuickJumper: true,
-                    className: '!bg-darkSecondary !text-textSecondary !border-[#2A2C33]',
+            <ConfigProvider
+                theme={{
+                    components: {
+                        Pagination: {
+                            itemActiveBg: '#2A2D30',
+                            colorPrimary: '#ffffff',
+                            colorText: '#ffffff',
+                            colorTextDisabled: '#666666',
+                            itemSize: 30,
+                        },
+                        Select:{
+                            colorBgContainer: '#2A2D30',
+                            colorText: '#D9D9D9',
+                            colorBorder: '#2A2D30',
+                        },
+                        Table: {
+                            colorBorder: '#2A2D30',
+                            headerBg: '#2A2D30',
+                            rowHoverBg: '#3A3D40',
+                        }
+                    }
                 }}
-                className="w-full"
-                rowClassName="bg-darkSecondary"
-                // virtual
-            />
+            >
+                <Table
+                    columns={columns}
+                    dataSource={data}
+                    pagination={{
+                        pageSize: 10,
+                        showSizeChanger: true,
+                        pageSizeOptions: ['5', '10', '20'],
+                        showTotal: (total, range) =>
+                            `Total ${total} items, from ${range[0]} to ${range[1]}`,
+                        total: data.length,
+                        position: ['bottomRight'],
+                        className: '!bg-darkSecondary !text-textSecondary !border-[#2A2C33] px-3',
+                    }}
+                    className="w-full"
+                    rowClassName="bg-darkSecondary"
+                />
+            </ConfigProvider>
         </div>
     );
 };
