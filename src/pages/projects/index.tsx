@@ -1,5 +1,5 @@
 import Collapse from "./components/collapse";
-import Issues from "./components/Issues";
+import Issues from "./components/issues";
 import HeaderBar from "./components/headerBar";
 import Sheets from "./sheets";
 
