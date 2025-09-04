@@ -1,7 +1,7 @@
-import { Drawer, Button } from 'antd';
+import { Drawer } from 'antd';
 import React from 'react';
 <CloseOutlined />
-import { SquareArrowOutUpRight, Megaphone } from 'lucide-react'
+import { SquareArrowOutUpRight } from 'lucide-react'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import SheetTabs from './components/tabs';
 import { CloseOutlined } from '@ant-design/icons';
