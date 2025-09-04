@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { Navigate, RouteObject } from 'react-router-dom';
 import React from 'react';
 
 import Projet from '@/pages/projects';
@@ -21,4 +21,8 @@ export const routes: RouteObject[] = [
             },
         ],
     },
+    {
+        path: '*',
+        element: <Navigate to={APP_PATHS.PROJECTS} />
+    }
 ];
