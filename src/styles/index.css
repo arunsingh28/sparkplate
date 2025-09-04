@@ -26,3 +26,7 @@
 .ant-collapse-expand-icon{
   color: #AAB0B9;
 }
+
+.ant-pagination-item-active{
+  border-color: #363737 !important;
+}
